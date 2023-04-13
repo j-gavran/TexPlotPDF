@@ -13,16 +13,17 @@ def write_file(file_path, file_name, content):
         f.write(content)
 
 
-def insert_image_path(tex_str, path):
-    image_idx = find_str_idx("IMAGE_PATH", tex_str)[0]
+def insert_to_str(tex_str, card, to_insert):
+    image_idx = find_str_idx(card, tex_str)[0]
     tex_str = tex_str[:image_idx[0]] + tex_str[image_idx[1]:]
-    tex_str = tex_str[:image_idx[0]] + path + tex_str[image_idx[0]:]
+    tex_str = tex_str[:image_idx[0]] + to_insert + tex_str[image_idx[0]:]
     return tex_str
 
 
-def get_tex_template(template_path, image_path):
+def get_tex_template(template_path, image_path, title):
     tex_str = read_file(template_path)
-    tex_str = insert_image_path(tex_str, image_path)
+    # tex_str = insert_to_str(tex_str, "IMAGE_PATH", image_path)
+    tex_str = insert_to_str(tex_str, "TITLE", title)
     return tex_str
 
 
