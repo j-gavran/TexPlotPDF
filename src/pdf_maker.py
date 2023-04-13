@@ -7,8 +7,8 @@ from tex_file import get_tex_template, write_file, run_latex_compile
 
 parser = argparse.ArgumentParser(description="Combines pdf plots into a tex file and makes a joint pdf.")
 parser.add_argument("-path", metavar="path", type=str, help="path to plots folder")
-parser.add_argument("-subplots", metavar="subplots", nargs='+', type=tuple, help="subplot layout per page")
-parser.add_argument("-title", metavar="title", nargs='+', type=str, default="Plots", help="title of the pdf")
+parser.add_argument("-subplots", metavar="subplots", nargs="+", type=tuple, help="subplot layout per page")
+parser.add_argument("-title", metavar="title", nargs="+", type=str, default="Plots", help="title of the pdf")
 
 args = parser.parse_args()
 

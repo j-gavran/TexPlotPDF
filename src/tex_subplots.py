@@ -4,10 +4,10 @@ import copy
 from pathlib import Path
 
 
-def sorted_nicely(l): 
-    """Sort the given iterable in the way that humans expect.""" 
-    convert = lambda text: int(text) if text.isdigit() else text 
-    alphanum_key = lambda key: [convert(c) for c in re.split('([0-9]+)', key)] 
+def sorted_nicely(l):
+    """Sort the given iterable in the way that humans expect."""
+    convert = lambda text: int(text) if text.isdigit() else text
+    alphanum_key = lambda key: [convert(c) for c in re.split("([0-9]+)", key)]
     return sorted(l, key=alphanum_key)
 
 
@@ -71,24 +71,23 @@ def make_tex_str(files, subplots, total_tex_str=""):
     tex_str = copy.copy(subplots_tex)
 
     for i, f in enumerate(files):
-        
-        if i % mult == 0 and i !=0:
+        if i % mult == 0 and i != 0:
             total_tex_str += tex_str + "\n\n\\newpage\n\n"
             tex_str = copy.copy(subplots_tex)
-        
+
         image_idx = find_str_idx("IMAGE", tex_str)[0]
-        tex_str = tex_str[:image_idx[0]] + tex_str[image_idx[1]:]
-        tex_str = tex_str[:image_idx[0]] + f + tex_str[image_idx[0]:]
+        tex_str = tex_str[: image_idx[0]] + tex_str[image_idx[1] :]
+        tex_str = tex_str[: image_idx[0]] + f + tex_str[image_idx[0] :]
 
         caption_str = Path(f).stem
         caption_str = caption_str.replace("_", " ")
         caption_idx = find_str_idx("CAPTION", tex_str)[0]
-        tex_str = tex_str[:caption_idx[0]] + tex_str[caption_idx[1]:]
-        tex_str = tex_str[:caption_idx[0]] + caption_str + tex_str[caption_idx[0]:]
+        tex_str = tex_str[: caption_idx[0]] + tex_str[caption_idx[1] :]
+        tex_str = tex_str[: caption_idx[0]] + caption_str + tex_str[caption_idx[0] :]
 
         if i == len(files) - 1:
             total_tex_str += tex_str
-    
+
     return total_tex_str
 
 
@@ -96,7 +95,7 @@ def construct_tex_subplots(path, subplots):
     files = get_pdf_files(path)
 
     mult = subplots[0] * subplots[1]
-    leftover = (len(files) ) % mult
+    leftover = (len(files)) % mult
 
     total_tex_str = make_tex_str(files[:-leftover], subplots)
     total_tex_str += "\n\n\\newpage\n\n"

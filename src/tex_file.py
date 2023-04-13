@@ -15,8 +15,8 @@ def write_file(file_path, file_name, content):
 
 def insert_to_str(tex_str, card, to_insert):
     image_idx = find_str_idx(card, tex_str)[0]
-    tex_str = tex_str[:image_idx[0]] + tex_str[image_idx[1]:]
-    tex_str = tex_str[:image_idx[0]] + to_insert + tex_str[image_idx[0]:]
+    tex_str = tex_str[: image_idx[0]] + tex_str[image_idx[1] :]
+    tex_str = tex_str[: image_idx[0]] + to_insert + tex_str[image_idx[0] :]
     return tex_str
 
 
