@@ -1,6 +1,7 @@
 import glob
 import re
 import copy
+import math as m
 from pathlib import Path
 
 
@@ -97,9 +98,16 @@ def construct_tex_subplots(path, subplots):
     mult = subplots[0] * subplots[1]
     leftover = (len(files)) % mult
 
-    total_tex_str = make_tex_str(files[:-leftover], subplots)
-    total_tex_str += "\n\n\\newpage\n\n"
-    total_tex_str = make_tex_str(files[-leftover:], (1, leftover), total_tex_str=total_tex_str)
+    if leftover != 0:
+        total_tex_str = make_tex_str(files[:-leftover], subplots)
+        total_tex_str += "\n\n\\newpage\n\n"
+
+        a = m.ceil(m.sqrt(mult))
+        b = m.ceil(mult / a)
+
+        total_tex_str = make_tex_str(files[-leftover:], (a, b), total_tex_str=total_tex_str)
+    else:
+        total_tex_str = make_tex_str(files, subplots)
 
     return total_tex_str
 
