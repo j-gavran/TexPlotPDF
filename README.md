@@ -9,7 +9,7 @@ python pdf_maker.py -path ~/Downloads/plots -subplots 33
 ```
 
 ## Help
-```bash
+```
 python pdf_maker.py --help                                                                                                
 usage: pdf_maker.py [-h] [-path path] [-subplots subplots [subplots ...]] [-title title [title ...]]
 
